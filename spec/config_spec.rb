@@ -1,6 +1,6 @@
-require 'spec/spec_helper'
+require 'spec_helper'
 
-describe Config do
+describe 'Config' do
   before(:all) do
     @username = 'username'
     @password = 'password'
@@ -46,50 +46,50 @@ describe Config do
     end
 
     it 'have username methods' do
-      expect(@conf).to respond_to(:get_username)
-      expect(@conf).to respond_to(:set_username)
+      expect(@conf).to respond_to(:username)
+      expect(@conf).to respond_to(:username=)
     end
 
     it 'have password methods' do
-      expect(@conf).to respond_to(:get_password)
-      expect(@conf).to respond_to(:set_password)
+      expect(@conf).to respond_to(:password)
+      expect(@conf).to respond_to(:password=)
     end
 
     it 'have soap end point methods' do
-      expect(@conf).to respond_to(:get_soap_end_point)
-      expect(@conf).to respond_to(:set_soap_end_point)
+      expect(@conf).to respond_to(:soap_end_point)
+      expect(@conf).to respond_to(:soap_end_point=)
     end
 
     it 'get username' do
-      expect(@conf.get_username).to eq(@username)
+      expect(@conf.username).to eq(@username)
     end
 
     it 'get password' do
-      expect(@conf.get_password).to eq(@password)
+      expect(@conf.password).to eq(@password)
     end
 
     it 'get soap end point' do
-      expect(@conf.get_soap_end_point).to eq(@soap_end_point)
+      expect(@conf.soap_end_point).to eq(@soap_end_point)
     end
 
     it 'set username' do
-      @conf.set_username('new_username')
-      expect(@conf.get_username).to eq('new_username')
+      @conf.username = 'new_username'
+      expect(@conf.username).to eq('new_username')
     end
 
     it 'set password' do
-      @conf.set_password('new_password')
-      expect(@conf.get_password).to eq('new_password')
+      @conf.password = 'new_password'
+      expect(@conf.password).to eq('new_password')
     end
 
     describe 'set soap end point' do
       it 'accept valid soap end point' do
         new_soap_end_point = 'http://other-host/table2.wsdl'
-        @conf.set_soap_end_point(new_soap_end_point)
-        expect(@conf.get_soap_end_point).to eq(new_soap_end_point)
+        @conf.soap_end_point = new_soap_end_point
+        expect(@conf.soap_end_point).to eq(new_soap_end_point)
       end
       it 'raise error for invalid soap end point' do
-        expect { @conf.set_soap_end_point('invalid_soap_end_point') }.to raise_error(ArgumentError)
+        expect { @conf.soap_end_point = 'invalid_soap_end_point' }.to raise_error(ArgumentError)
       end
     end
   end

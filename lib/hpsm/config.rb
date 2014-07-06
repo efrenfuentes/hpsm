@@ -28,15 +28,15 @@ module Hpsm
 
     # get methods for properties
     %w(username password soap_end_point).each do |meth|
-      define_method('get_' + meth) { @config[meth.to_sym] }
+      define_method(meth) { @config[meth.to_sym] }
     end
 
     # set methods for properties
     %w(username password).each do |meth|
-      define_method('set_' + meth) { |value| @config[meth.to_sym] = value }
+      define_method(meth + '=') { |value| @config[meth.to_sym] = value }
     end
 
-    def set_soap_end_point(value)
+    def soap_end_point=(value)
       raise ArgumentError, "soap_end_point must be a valid url" unless (value =~ URI::regexp) == 0
       @config[:soap_end_point] = value
     end
